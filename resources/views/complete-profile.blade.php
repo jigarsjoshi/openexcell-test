@@ -48,7 +48,7 @@
 
                                     <div class="form-group col-6">
                                         {!! Form::label('user_type', 'User Type') !!}
-                                        {!! Form::select('user_type', ['0' => 'Designer', '1' => 'Client'], null, ['class' => 'form-control']) !!}
+                                        {!! Form::select('user_type', ['0' => 'Client', '1' => 'Designer'], null, ['class' => 'form-control']) !!}
                                     </div>
 
                                     <div class="form-group col-12">

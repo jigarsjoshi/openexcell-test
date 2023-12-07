@@ -22,18 +22,26 @@ class LoginController extends Controller
         $user = User::where('google_id', $socialUser->id)->first();
 
         if ($user) { 
-            Auth::login($user);
+            Auth::login($user);  
 
-            dd("main login done");
-
+            if($user->user_type == 0) {
+                return redirect()->route('client.dashboard');
+            } else {
+                return redirect()->route('designer.dashboard');
+            }
         } else { 
 
             $existingUser = User::where('email', $socialUser->email)->first();
 
             if ($existingUser) { 
                  
-                Auth::login($existingUser);
-                dd("patch login done");
+                Auth::login($existingUser); 
+
+                if($existingUser->user_type == 0) {
+                    return redirect()->route('client.dashboard');
+                } else {
+                    return redirect()->route('designer.dashboard');
+                }
 
             } else { 
 
@@ -47,9 +55,7 @@ class LoginController extends Controller
  
                 return redirect()->route('complete-profile');  
             }
-        } 
-
-        // return redirect('/dashboard');
+        }   
     }
 
     public function redirectToFacebook()
@@ -65,7 +71,13 @@ class LoginController extends Controller
 
         if ($user) { 
             Auth::login($user);
-            dd("main login done");
+            
+            if($user->user_type == 0) {
+                return redirect()->route('client.dashboard');
+            } else {
+                return redirect()->route('designer.dashboard');
+            }
+
         } else { 
 
             $existingUser = User::where('email', $socialUser->email)->first();
@@ -73,7 +85,13 @@ class LoginController extends Controller
             if ($existingUser) {    
 
                 Auth::login($existingUser); 
-                dd("patch login done");
+            
+            
+                if($user->user_type == 0) {
+                    return redirect()->route('client.dashboard');
+                } else {
+                    return redirect()->route('designer.dashboard');
+                } 
 
             } else { 
 
@@ -91,7 +109,7 @@ class LoginController extends Controller
         // return redirect('/dashboard');
     }
 
-    public function compelteProfile()
+    public function completeProfile()
     {
         // return view('complete-profile');
         $userId = Auth::id();
@@ -129,13 +147,13 @@ class LoginController extends Controller
                 $user->save();
             }
  
-            dd("Profile saved successfully");
-
-            // return redirect('/dashboard')->with('success', 'Profile saved successfully');
+            if($user->user_type == 0) {
+                return redirect()->route('client.dashboard');
+            } else {
+                return redirect()->route('designer.dashboard');
+            }
         }
 
-        dd("User not found");
- 
-        // return redirect('/dashboard')->with('error', 'User not found');
+        redirect('login');
     }
 }

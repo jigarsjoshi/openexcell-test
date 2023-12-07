@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('dial_code')->nullable();
             $table->string('profile_pic')->nullable();
-            $table->tinyInteger('user_type')->default(0)->comment('0 = designer, 1 = client');
+            $table->tinyInteger('user_type')->default(0)->comment('0 = client, 1 = designer');
             $table->string('password')->nullable();
             $table->string('google_id')->nullable();
             $table->string('fb_id')->nullable();

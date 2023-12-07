@@ -57,4 +57,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/client-projects/{project}', [ClientProjectController::class, 'show'])->name('client.project.show');
  
     Route::get('/designer-dashboard', [DesignerProjectController::class, 'index'])->name('designer.dashboard');
+    Route::get('/designer-projects/{project}', [DesignerProjectController::class, 'show'])->name('designer.project.show');
 });

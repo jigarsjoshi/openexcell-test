@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
+use App\Models\Project;
+use App\Models\File;
+use Illuminate\Support\Facades\Session;
 
 class DesignerProjectController extends Controller
 {
@@ -12,7 +18,9 @@ class DesignerProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
+        $data['projects'] = Project::where('designer_id', Auth::id())->orderBy('id', 'desc')->get();  
+        return view('designer_project.index', $data); 
     }
 
     /**
@@ -42,9 +50,11 @@ class DesignerProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        $project->load('files');  
+        $data['project'] = $project; 
+        return view('designer_project.show', $data);
     }
 
     /**

@@ -24,4 +24,8 @@ class Project extends Model
     public function designer() {
         return $this->hasOne(User::class, 'id', 'designer_id');
     } 
+
+    public function client() {
+        return $this->hasOne(User::class, 'id', 'client_id');
+    } 
 }

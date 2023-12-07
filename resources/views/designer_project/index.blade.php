@@ -17,8 +17,7 @@
                             <h2>Projects Dashboard</h2>
                         </span> 
                         <span>
-                            <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
-                            <a href="{{ route('client.project.create') }}" class="btn btn-primary">Create Project</a>
+                            <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a> 
                         </span>
                     </div>
                     <div class="card-body">
@@ -28,7 +27,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Due Date</th>
-                                    <th>Assigned To</th>
+                                    <th>Assigned By</th>
                                     <th>Is complete</th>
                                     <th>Action</th>
                                 </tr>
@@ -47,7 +46,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('client.project.show', ['project' => $project->id]) }}" class="btn btn-sm btn-primary">Details</a>
+                                            <a href="{{ route('designer.project.show', ['project' => $project->id]) }}" class="btn btn-sm btn-primary">Details</a>
                                         </td>
                                     </tr>
                                 @endforeach

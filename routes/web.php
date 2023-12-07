@@ -50,12 +50,16 @@ Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookC
 Route::middleware('auth')->group(function () {
     Route::get('/complete-profile', [LoginController::class, 'completeProfile'])->name('complete-profile'); 
     Route::post('/save-profile', [LoginController::class, 'saveProfile'])->name('save-profile');
- 
-    Route::get('/client-dashboard', [ClientProjectController::class, 'index'])->name('client.dashboard');
-    Route::get('/client-project-create', [ClientProjectController::class, 'create'])->name('client.project.create');
-    Route::post('/client-project-save', [ClientProjectController::class, 'store'])->name('client.project.save');
-    Route::get('/client-projects/{project}', [ClientProjectController::class, 'show'])->name('client.project.show');
- 
-    Route::get('/designer-dashboard', [DesignerProjectController::class, 'index'])->name('designer.dashboard');
-    Route::get('/designer-projects/{project}', [DesignerProjectController::class, 'show'])->name('designer.project.show');
+
+    Route::middleware('role:client')->group(function () {
+        Route::get('/client-dashboard', [ClientProjectController::class, 'index'])->name('client.dashboard');
+        Route::get('/client-project-create', [ClientProjectController::class, 'create'])->name('client.project.create');
+        Route::post('/client-project-save', [ClientProjectController::class, 'store'])->name('client.project.save');
+        Route::get('/client-projects/{project}', [ClientProjectController::class, 'show'])->name('client.project.show');
+    });
+    
+    Route::middleware('role:designer')->group(function () {
+        Route::get('/designer-dashboard', [DesignerProjectController::class, 'index'])->name('designer.dashboard');
+        Route::get('/designer-projects/{project}', [DesignerProjectController::class, 'show'])->name('designer.project.show');
+    });
 });
